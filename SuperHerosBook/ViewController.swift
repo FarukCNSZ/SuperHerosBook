@@ -12,10 +12,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var tableView: UITableView!
     
-    var superKahramanIsimleri = [String]()
-    var superKahramanGorselleri = [String]()
-    var secilenIsim = ""
-    var secilenGorsel = ""
+    var superHerosNames = [String]()
+    var superHerosImages = [String]()
+    var chosenName = ""
+    var chosenImage = ""
     
     //secilenisim ve secilengörsel ara değişkenler, bu ara değişkenlere asıl değişkeni eşitliyoruz sonra yeni değişkenleri ara değişkenlere eşitliyoruz
     
@@ -25,42 +25,42 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.delegate = self
         tableView.dataSource = self
         
-        superKahramanIsimleri.append("Batman")
-        superKahramanIsimleri.append("Superman")
-        superKahramanIsimleri.append("Iron Man")
-        superKahramanIsimleri.append("Spiderman")
-        superKahramanIsimleri.append("Captain America")
+        superHerosNames.append("Batman")
+        superHerosNames.append("Superman")
+        superHerosNames.append("Iron Man")
+        superHerosNames.append("Spiderman")
+        superHerosNames.append("Captain America")
         
-        superKahramanGorselleri.append("batman")
-        superKahramanGorselleri.append("superman")
-        superKahramanGorselleri.append("ironman")
-        superKahramanGorselleri.append("spiderman")
-        superKahramanGorselleri.append("captainamerica")
+        superHerosImages.append("batman")
+        superHerosImages.append("superman")
+        superHerosImages.append("ironman")
+        superHerosImages.append("spiderman")
+        superHerosImages.append("captainamerica")
         
     }
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return superKahramanGorselleri.count
+        return superHerosImages.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel?.text = superKahramanIsimleri[indexPath.row]
+        cell.textLabel?.text = superHerosNames[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            superKahramanIsimleri.remove(at: indexPath.row)
-            superKahramanGorselleri.remove(at: indexPath.row)
+            superHerosNames.remove(at: indexPath.row)
+            superHerosImages.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.fade)
         }
     }
         
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        secilenIsim = superKahramanIsimleri[indexPath.row]
-        secilenGorsel = superKahramanGorselleri[indexPath.row]
+        chosenName = superHerosNames[indexPath.row]
+        chosenImage = superHerosImages[indexPath.row]
         performSegue(withIdentifier: "toDetailsVC", sender: nil)
         //performSegue viewController arası geçiş için yapılır
         
@@ -72,8 +72,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let destinationVC = segue.destination as! DetailsViewController
             //detailsViewControllerdaki secilenKahramanİsmine ulaşmak için yapıyoruz
             
-            destinationVC.secilenKahramanIsmi = secilenIsim
-            destinationVC.secilenGorselIsmi = secilenGorsel
+            destinationVC.chosenHeroName = chosenName
+            destinationVC.chosenImageName = chosenImage
             //secilenisim ve secilengörsel ara değişkenler, bu ara değişkenlere asıl değişkeni eşitliyoruz sonra yeni değişkenleri ara değişkenlere eşitliyoruz
             
             
